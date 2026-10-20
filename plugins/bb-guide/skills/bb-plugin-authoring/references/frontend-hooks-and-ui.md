@@ -260,7 +260,11 @@ composer.
   user's disk, and the full hugeicons set is over 100 MB per copy.
 - `toast`: `import { toast } from "sonner"` — runtime-shimmed to the host's
   Toaster (`toast.success("Saved")` just works; never mount your own
-  `<Toaster>`).
+  `<Toaster>`). `toast()`, `success`, `info`, `warning`, `error`, `message`,
+  `loading`, and `dismiss` draw bb's own toast and keep it in the
+  notification center. Pass `action` and `cancel` as `{ label, onClick }`;
+  a function title or description, a JSX action, or an `icon` falls back
+  to sonner's stock toast. `promise` and `custom` are sonner's own.
 - Never bundled (runtime-shimmed, import freely): react, the portaling
   radix families (`@radix-ui/react-dialog`, `-alert-dialog`, `-popover`,
   `-select`, `-dropdown-menu`, `-context-menu`, `-menubar`, `-hover-card`,

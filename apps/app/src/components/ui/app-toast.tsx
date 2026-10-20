@@ -22,19 +22,23 @@ export type AppToastTone =
   | "error"
   | "loading";
 
+export const APP_TOAST_FORWARDED_OPTION_KEYS = [
+  "className",
+  "classNames",
+  "dismissible",
+  "duration",
+  "id",
+  "invert",
+  "onAutoClose",
+  "onDismiss",
+  "position",
+  "richColors",
+  "style",
+  "unstyled",
+] as const satisfies readonly (keyof ExternalToast)[];
+
 type AppToastForwardedOptionKey =
-  | "className"
-  | "classNames"
-  | "dismissible"
-  | "duration"
-  | "id"
-  | "invert"
-  | "onAutoClose"
-  | "onDismiss"
-  | "position"
-  | "richColors"
-  | "style"
-  | "unstyled";
+  (typeof APP_TOAST_FORWARDED_OPTION_KEYS)[number];
 
 export interface AppToastOptions extends Pick<
   ExternalToast,

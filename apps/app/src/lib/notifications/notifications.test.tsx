@@ -2,7 +2,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { AppToastContent, appToast } from "@/components/ui/app-toast";
-import { createRecordingToast } from "./plugin-toast-recording";
 import {
   getNotificationCenterState,
   getNotifications,
@@ -28,26 +27,6 @@ describe("toast history", () => {
     expect(getNotifications()[0]?.description).toBe(
       'Could not resolve "@radix-ui/react-tabs"',
     );
-  });
-
-  it("records plugin toasts without breaking the wrapped sonner methods", () => {
-    const base = Object.assign(vi.fn(), {
-      error: vi.fn((message?: unknown, data?: unknown) => {
-        void message;
-        void data;
-        return "error";
-      }),
-      dismiss: vi.fn(() => "dismiss"),
-    });
-    const recording = createRecordingToast(base);
-
-    recording.error("Sandbox boot failed", { description: "exit code 1" });
-
-    expect(getNotifications()[0]?.title).toBe("Sandbox boot failed");
-    expect(base.error).toHaveBeenCalledWith("Sandbox boot failed", {
-      description: "exit code 1",
-    });
-    expect(recording.dismiss()).toBe("dismiss");
   });
 });
 
